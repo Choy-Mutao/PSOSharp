@@ -2,8 +2,8 @@
 
 namespace PSOSharp.Gearbox
 {
-    public interface IGearbox
+    public interface IGearbox<T> where T : IParticle
     {
-        void Drive(ref IParticle particle);
+        void Drive(ref T particle);
     }
 }

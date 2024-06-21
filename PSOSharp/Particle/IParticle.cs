@@ -3,12 +3,12 @@
     public interface IParticle
     {
         int Dimension { get; }
-        object[] Positions { get; }
-        object[] Velocity { get; }
+        double[] Position { get; }
+        double[] Velocity { get; }
+        double Fitness { get; set; } 
 
         IParticle CreateNew();
         IParticle Clone();
-        IParticle CopyTo();
         string ToString();
     }
 }

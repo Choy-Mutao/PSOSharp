@@ -9,6 +9,10 @@ namespace PSOSharp
         public ISwarm Swarm;
         public ITermination Termination;
 
+        public event EventHandler InitializationHandler;
+        public event EventHandler EvaluateHandler;
+        public event EventHandler TerminateHandler;
+
         public ParticleSwarmAlgorithm(ISwarm swarm, ITermination termination)
         {
             Swarm = swarm;
@@ -22,12 +26,14 @@ namespace PSOSharp
 
             // Build
             Swarm.Initialization();
+            InitializationHandler?.Invoke(this, EventArgs.Empty);
 
             do
             {
                 Swarm.TakeAction();
+                EvaluateHandler?.Invoke(this, EventArgs.Empty);
             } while (!Termination.HasReached(Swarm));
-            
+            TerminateHandler?.Invoke(this, EventArgs.Empty);
         }
     }
 }
